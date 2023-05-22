@@ -1,9 +1,9 @@
 function AppHeader(props) {
   return (
     <div>
-      <div></div>
+      <div>header</div>
     </div>
-  );
+  )
 }
 
-export default AppHeader;
+export default AppHeader

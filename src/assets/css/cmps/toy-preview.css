@@ -1,0 +1,5 @@
+.toy-preview {
+  width: 30rem;
+  border-radius: 6px;
+  break-inside: avoid;
+}
