@@ -6,6 +6,7 @@ import './assets/css/main.css'
 
 import ToyIndex from './views/toy-index'
 import AppHeader from './cmps/app-header'
+import Dashboard from './views/dashboard.jsx'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               {/* <Route element={<HomePage />} path="/" /> */}
               <Route element={<ToyIndex />} path="/toy" />
+              <Route element={<Dashboard />} path="/dashboard" />
             </Routes>
           </main>
         </section>

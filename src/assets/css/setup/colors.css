@@ -12,6 +12,16 @@ body {
   color: var(--clr1);
 }
 
+.app-header {
+  background-color: var(--clr4) !important;
+  color: var(--clr1) !important;
+}
+
 .toy-preview {
   background-color: var(--clr5);
+  color: var(--clr4);
+}
+
+.dashboard ul li {
+  background-color: var(--clr1);
 }

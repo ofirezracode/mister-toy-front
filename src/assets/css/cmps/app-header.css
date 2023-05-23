@@ -1,0 +1,10 @@
+.app-header {
+  font-size: 1.6rem !important;
+}
+.app-header a button {
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}

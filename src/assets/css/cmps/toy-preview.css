@@ -1,5 +1,13 @@
 .toy-preview {
-  width: 30rem;
+  min-width: 15rem;
   border-radius: 6px;
-  break-inside: avoid;
+}
+
+.toy-preview .labels {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.toy-preview .labels span {
+  font-size: 1.2rem;
 }

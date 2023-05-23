@@ -12,6 +12,8 @@ export const toyService = {
   getEmptyToy,
   getDefaultFilter,
   getLabels,
+  getInStockByLabel,
+  getAvgByLabel,
 }
 
 function query(filterBy = {}) {
@@ -47,4 +49,40 @@ function getDefaultFilter() {
 
 function getLabels() {
   return labels
+}
+
+function getInStockByLabel(toys = []) {
+  const data = toys.reduce((acc, toy) => {
+    toy.labels.forEach((label) => {
+      if (acc[label]) {
+        acc[label].amount++
+      } else {
+        acc[label] = { amount: 1, inStockAmount: 0 }
+      }
+      if (toy.inStock === 'true') {
+        acc[label].inStockAmount++
+      }
+    })
+    return acc
+  }, {})
+  const labels = Object.keys(data)
+  const percentages = Object.values(data).map((labelData) => ((labelData.inStockAmount * 100) / labelData.amount).toFixed(0))
+  return { labels, percentages }
+}
+
+function getAvgByLabel(toys = []) {
+  const data = toys.reduce((acc, toy) => {
+    toy.labels.forEach((label) => {
+      if (acc[label]) {
+        acc[label].price += toy.price
+        acc[label].amount++
+      } else {
+        acc[label] = { amount: 1, price: toy.price }
+      }
+    })
+    return acc
+  }, {})
+  const labels = Object.keys(data)
+  const priceAvgs = Object.values(data).map((labelData) => (labelData.price / labelData.amount).toFixed(2))
+  return { labels, priceAvgs }
 }
