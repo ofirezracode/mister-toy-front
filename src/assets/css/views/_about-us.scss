@@ -1,0 +1,36 @@
+.about-us {
+  h2 {
+    margin-inline: 7.2rem;
+    font-size: 3.2rem;
+  }
+
+  .about-us-text {
+    margin-inline-start: 9.6rem;
+    p {
+      max-width: 75rem;
+      margin-block-end: 1.2rem;
+      font-size: 1.6rem;
+      line-height: 1.35;
+    }
+  }
+
+  > img {
+    display: block;
+    margin-inline-end: 7.2rem;
+    width: 35rem;
+    justify-self: center;
+    border-radius: 15px;
+  }
+
+  .about-us-branches {
+    padding-block: 3.6rem;
+    > * {
+      margin-inline: 7.2rem;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+      margin-block-end: 1.6rem;
+    }
+  }
+}

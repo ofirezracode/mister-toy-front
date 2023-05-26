@@ -1,0 +1,44 @@
+.toy-preview {
+  width: 25rem;
+  height: 100%;
+  border-radius: 6px;
+  padding: 1.2rem;
+  @include flex();
+  @include column();
+  gap: 1.2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  header {
+    h3 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .labels {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    @include flex();
+
+    span {
+      font-size: 1.2rem;
+    }
+  }
+
+  .preview-row {
+    @include flex();
+    @include between();
+    margin-inline: 1.2rem;
+    font-size: 1.4rem;
+  }
+
+  .preview-buttons {
+    flex: 1;
+    @include flex();
+
+    align-items: end;
+
+    button {
+      height: fit-content;
+    }
+  }
+}

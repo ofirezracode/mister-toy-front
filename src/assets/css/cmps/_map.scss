@@ -1,0 +1,13 @@
+.map {
+  margin-block-end: 3.6rem;
+  .map-buttons {
+    @include flex();
+    @include center();
+    margin-block-end: 2.8rem;
+    gap: 1.6rem;
+
+    button {
+      font-size: 1.4rem;
+    }
+  }
+}

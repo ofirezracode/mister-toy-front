@@ -35,11 +35,10 @@ function save(toy) {
 
 function getEmptyToy() {
   return {
-    name: 'Buzz Lightyear',
-    price: 123,
-    labels: ['Doll', 'Battery Powered'],
-    createdAt: 1631031801011,
-    inStock: true,
+    name: '',
+    price: 0,
+    labels: [],
+    inStock: false,
   }
 }
 

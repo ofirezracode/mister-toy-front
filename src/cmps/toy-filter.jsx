@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
 import FormControl from '@mui/material/FormControl'
 import ListItemText from '@mui/material/ListItemText'
 import Select from '@mui/material/Select'
@@ -9,24 +13,12 @@ import Checkbox from '@mui/material/Checkbox'
 
 import { toyService } from '../services/toy.service'
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-}
-
 function ToyFilter({ onFilterChange, filterBy }) {
   console.log('filterBy', filterBy)
   filterBy = filterBy ? filterBy : toyService.getDefaultFilter()
   const [name, setName] = useState(filterBy.name)
   const [inStock, setInStock] = useState(filterBy.inStock)
   const [labels, setLabels] = useState(filterBy.labels)
-  const [isWriting, setIsWriting] = useState(false)
 
   const handleChange = (event) => {
     const {
@@ -45,18 +37,14 @@ function ToyFilter({ onFilterChange, filterBy }) {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (isWriting) {
-        setIsWriting(false)
-        onFilterChange({ name })
-      }
+      onFilterChange({ name })
     }, 400)
     return () => {
       clearTimeout(debounce)
     }
-  }, [isWriting])
+  }, [name])
 
   function onNameChange(e) {
-    setIsWriting(true)
     setName(e.target.value)
   }
 
@@ -67,36 +55,48 @@ function ToyFilter({ onFilterChange, filterBy }) {
   }
 
   return (
-    <form>
-      <div className="filter-container">
-        <label htmlFor="name">Name</label>
+    <form className="toy-filter">
+      <div className="filter-container name">
         <input value={name} onChange={onNameChange} type="text" name="name" placeholder="Search..."></input>
       </div>
       <div className="filter-container">
-        <label htmlFor="in-stock-all">All</label>
-        <input onChange={onStockChange} id="in-stock-all" type="radio" name="in-stock" value="all" checked={inStock === 'all'}></input>
-        <label htmlFor="in-stock-stock">Only in stock</label>
-        <input onChange={onStockChange} id="in-stock-stock" type="radio" name="in-stock" value="true" checked={inStock === 'true'}></input>
-        <label htmlFor="in-stock-out">Only out of stock</label>
-        <input onChange={onStockChange} id="in-stock-out" type="radio" name="in-stock" value="false" checked={inStock === 'false'}></input>
+        <FormControl>
+          <RadioGroup row aria-labelledby="stock-filter" defaultValue="all" name="stock">
+            <FormControlLabel className="stock-radio-item" onChange={onStockChange} value="all" control={<Radio />} label="All" />
+            <FormControlLabel
+              className="stock-radio-item"
+              onChange={onStockChange}
+              value="true"
+              control={<Radio />}
+              label="Only in stock"
+            />
+            <FormControlLabel
+              className="stock-radio-item"
+              onChange={onStockChange}
+              value="false"
+              control={<Radio />}
+              label="Only out of stock"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-      <div className="filter-container">
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+      <div className="filter-container labels">
+        <label>Labels:</label>
+        <FormControl className="label-select">
           <Select
-            labelId="demo-multiple-checkbox-label"
-            id="demo-multiple-checkbox"
+            className="select-container"
+            id="filter-labels"
             multiple
             value={labels}
             onChange={handleChange}
             input={<OutlinedInput label="Tag" />}
             renderValue={(selected) => selected.join(', ')}
-            MenuProps={MenuProps}
+            sx={{ fontSize: 14 }}
           >
             {toyService.getLabels().map((label) => (
               <MenuItem key={label} value={label}>
                 <Checkbox checked={labels.indexOf(label) > -1} />
-                <ListItemText primary={label} />
+                <ListItemText className="label-list-item" primary={label} />
               </MenuItem>
             ))}
           </Select>

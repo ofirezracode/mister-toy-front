@@ -1,0 +1,27 @@
+/* Setup */
+/* @import './setup/variables.css'; */
+@import './setup/colors.css';
+
+/* @import './setup/fonts.css'; */
+
+/* Basics */
+@import './basics/_base.scss';
+@import './basics/_helpers.scss';
+@import './basics/_layout.scss';
+
+/* Views */
+@import './views/_toy-index.scss';
+@import './views/_dashboard.scss';
+@import './views/_about-us.scss';
+/* @import './views/todo-edit.css'; */
+@import './views/_toy-details.scss';
+@import './views/_add-toy.scss';
+/* @import './views/login-page.css'; */
+
+/* Cmps */
+@import './cmps/_app-header.scss';
+/* @import './cmps/user-msg.css'; */
+@import './cmps/_toy-preview.scss';
+@import './cmps/_toy-list.scss';
+@import './cmps/_toy-filter.scss';
+@import './cmps/_map.scss';

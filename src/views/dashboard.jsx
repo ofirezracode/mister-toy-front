@@ -113,7 +113,7 @@ function Dashboard({}) {
   return (
     <section className="dashboard view">
       <h2>Dashboard</h2>
-      <ul className="clean-list flex center">
+      <ul>
         <li>
           <Bar height={300} options={barOptions} data={barData} />
         </li>

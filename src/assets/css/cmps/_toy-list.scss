@@ -1,0 +1,8 @@
+.toy-list {
+  flex-wrap: wrap;
+  gap: 2.4rem;
+
+  @include flex();
+  @include justify-center();
+  @include clean-list();
+}

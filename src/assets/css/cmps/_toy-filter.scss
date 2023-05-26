@@ -1,0 +1,48 @@
+.toy-filter {
+  padding: 1.2rem;
+  margin-block-end: 2.4rem;
+  border-radius: 6px;
+  @include flex();
+  @include center();
+  font-size: 1.6rem;
+
+  gap: 3.2rem;
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  .filter-container {
+    // @include flex();
+    // @include column();
+    &.name {
+      input {
+        padding: 0.8rem 1.2rem;
+        border-radius: 6px;
+        font-size: 1.4rem;
+        border: 1px solid var(--gray2);
+      }
+    }
+
+    &.labels {
+      @include flex();
+      gap: 1.2rem;
+      label {
+        align-self: center;
+      }
+      .label-select {
+        width: 30rem;
+        .select-container {
+          & > div {
+            padding: 0.8rem 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.label-list-item,
+.stock-radio-item {
+  span {
+    font-size: 1.4rem;
+  }
+}

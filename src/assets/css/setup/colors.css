@@ -5,6 +5,10 @@
   --clr4: #617a55;
 
   --clr5: #a4d0a457;
+
+  --gray1: #e4e4e7;
+  --gray2: #9ca3af;
+  --gray3: #4b5563;
 }
 
 body {
@@ -12,16 +16,46 @@ body {
   color: var(--clr1);
 }
 
+.about-us-branches,
+.toy-filter,
+.filter-container.name input,
+.toy-preview,
+.add-toy form {
+  color: var(--clr4);
+  background-color: var(--clr1);
+}
+.add-toy form .input-container input {
+  color: var(--clr4);
+  background-color: var(--clr2);
+}
+
 .app-header {
   background-color: var(--clr4) !important;
   color: var(--clr1) !important;
 }
 
-.toy-preview {
-  background-color: var(--clr5);
-  color: var(--clr4);
-}
-
 .dashboard ul li {
   background-color: var(--clr1);
+}
+
+.map button {
+  background-color: var(--clr3);
+  color: var(--clr1);
+}
+
+.toy-preview .preview-buttons button,
+.toy-preview .details-buttons button,
+.add-toy button,
+.toy-index .add-toy-btn {
+  background-color: var(--clr3);
+  color: var(--gray3);
+}
+
+.map button:hover,
+.toy-preview .preview-buttons button:hover,
+.toy-preview .details-buttons button:hover,
+.add-toy button:hover,
+.toy-index .add-toy-btn:hover {
+  background-color: var(--clr4);
+  color: var(--clr1);
 }

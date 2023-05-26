@@ -1,0 +1,20 @@
+.dashboard {
+  h2 {
+    font-size: 3.2rem;
+    margin-block-end: 2.4rem;
+  }
+  ul {
+    @include flex();
+    @include center();
+    @include clean-list();
+    flex-wrap: wrap;
+    gap: 2.4rem;
+
+    li {
+      height: 35rem;
+      width: 35rem;
+      padding: 1.2rem;
+      border-radius: 6px;
+    }
+  }
+}

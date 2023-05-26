@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+import Button from '@mui/material/Button'
 
 import { toyService } from '../services/toy.service'
 import { loadToys, saveToy } from '../store/toy.action.js'
-import { removeToy } from '../store/toy.action.js'
 import { saveFilter } from '../store/filter.action'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -11,7 +13,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import ToyList from '../cmps/toy-list'
 import ToyFilter from '../cmps/toy-filter'
 
-function ToyIndex(props) {
+function ToyIndex() {
   const toys = useSelector((storeState) => storeState.toyModule.toys)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
@@ -19,28 +21,6 @@ function ToyIndex(props) {
   useEffect(() => {
     loadToys(filterBy)
   }, [filterBy])
-
-  function onRemoveToy(toyId) {
-    removeToy(toyId)
-      .then(() => {
-        showSuccessMsg('Toy removed')
-      })
-      .catch((err) => {
-        showErrorMsg('Cannot remove toy')
-      })
-  }
-
-  function onAddToy() {
-    const toyToSave = toyService.getEmptyToy()
-
-    saveToy(toyToSave)
-      .then((savedToy) => {
-        showSuccessMsg(`Toy added (id: ${savedToy._id})`)
-      })
-      .catch((err) => {
-        showErrorMsg('Cannot add toy')
-      })
-  }
 
   function onEditToy(toy) {
     const price = +prompt('New price?', toy.price)
@@ -63,8 +43,13 @@ function ToyIndex(props) {
   return (
     <section className="toy-index view">
       <h2>Our Selection</h2>
+      <Link to={`/toy/add`}>
+        <Button className="add-toy-btn" variant="contained">
+          Add toy <i className="fa-solid fa-plus"></i>
+        </Button>
+      </Link>
       <ToyFilter filterBy={filterBy} onFilterChange={onFilterChange} />
-      <ToyList toys={toys} onRemoveToy={onRemoveToy} onAddToy={onAddToy} onEditToy={onEditToy} />
+      <ToyList toys={toys} onEditToy={onEditToy} />
     </section>
   )
 }

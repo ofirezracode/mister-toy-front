@@ -1,0 +1,25 @@
+.view {
+  // margin: 3.6rem;
+  // padding-inline: 3.6rem;
+
+  // .full {
+  //   grid-column: 1 / -1;
+  // }
+  margin-block-start: 3.6rem;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 7.6rem 1fr 7.6rem;
+  & > * {
+    grid-column: 2;
+  }
+  .full {
+    grid-column: 1 / -1;
+  }
+  .about-us {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 3.6rem;
+  }
+}

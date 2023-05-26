@@ -1,23 +1,22 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 
-function ToyPreview({ toy, onRemoveToy }) {
+function ToyPreview({ children, toy }) {
   return (
-    <Card variant="outlined">
-      <CardContent className="toy-preview">
-        <header>
-          <h3>{toy.name}</h3>
-          <p>{toy.price}</p>
-        </header>
-        <div className="labels flex">
-          {toy.labels.map((label, i) => (
-            <Chip size="small" key={i} label={label} />
-          ))}
-        </div>
-        <div className="in-stock">{toy.inStock === 'true' ? 'In stock!' : 'Not in stock...'}</div>
-      </CardContent>
-    </Card>
+    <article className="toy-preview" variant="outlined">
+      <header>
+        <h3>{toy.name}</h3>
+      </header>
+      <div className="labels">
+        {toy.labels.map((label, i) => (
+          <Chip size="small" key={i} label={label} />
+        ))}
+      </div>
+      <div className="preview-row">
+        <p className="price">{toy.price}</p>
+        <p className="in-stock">{toy.inStock === 'true' ? 'In stock!' : 'Not in stock...'}</p>
+      </div>
+      {children}
+    </article>
   )
 }
 
