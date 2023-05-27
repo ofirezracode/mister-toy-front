@@ -14,7 +14,6 @@ import Checkbox from '@mui/material/Checkbox'
 import { toyService } from '../services/toy.service'
 
 function ToyFilter({ onFilterChange, filterBy }) {
-  console.log('filterBy', filterBy)
   filterBy = filterBy ? filterBy : toyService.getDefaultFilter()
   const [name, setName] = useState(filterBy.name)
   const [inStock, setInStock] = useState(filterBy.inStock)
@@ -49,7 +48,6 @@ function ToyFilter({ onFilterChange, filterBy }) {
   }
 
   function onStockChange(e) {
-    console.log('e.target.value', e.target.value)
     setInStock(e.target.value)
     onFilterChange({ inStock: e.target.value })
   }

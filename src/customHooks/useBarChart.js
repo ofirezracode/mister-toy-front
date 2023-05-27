@@ -36,7 +36,7 @@ export function useBarChart(initialState) {
           break
       }
     }
-    console.log('barData', barData)
+
     setBarData({ labels, datasets: [{ label: datasetLabel, data, backgroundColor }] })
   }
 

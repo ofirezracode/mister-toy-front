@@ -20,7 +20,7 @@ function AddToy({ children }) {
 
   function handleChange({ target }) {
     const field = target.name
-    console.log('target', target.type)
+
     let value
     if (target.type === 'number') {
       value = +target.value

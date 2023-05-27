@@ -20,7 +20,6 @@ const initialState = {
 }
 
 export function toyReducer(state = initialState, action) {
-  // console.log('action', action)
   let toys
   let shoppingCart
 

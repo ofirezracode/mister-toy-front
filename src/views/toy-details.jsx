@@ -28,7 +28,6 @@ function ToyDetails() {
       })
   }
 
-  console.log('toy', toy)
   return (
     <section className="toy-details view">
       <ToyPreview toy={toy}>

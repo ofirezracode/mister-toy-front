@@ -107,7 +107,6 @@ function Dashboard({}) {
   useEffect(() => {
     const { labels, percentages } = toyService.getInStockByLabel(toys)
     setBarProp({ labels, data: percentages })
-    console.log('here')
   }, [toys])
 
   return (
