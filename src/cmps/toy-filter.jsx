@@ -60,9 +60,9 @@ function ToyFilter({ onFilterChange, onSortChange, filterBy, sortBy }) {
   let sortNameIcon, sortPriceIcon
   sortNameIcon = sortPriceIcon = ''
   if (sortBy.sortName) {
-    sortNameIcon = sortBy.sortName > 0 ? <i class="fa-solid fa-sort-up"></i> : <i class="fa-solid fa-sort-down"></i>
+    sortNameIcon = sortBy.sortName > 0 ? <i className="fa-solid fa-sort-up"></i> : <i className="fa-solid fa-sort-down"></i>
   } else if (sortBy.sortPrice) {
-    sortPriceIcon = sortBy.sortPrice > 0 ? <i class="fa-solid fa-sort-up"></i> : <i class="fa-solid fa-sort-down"></i>
+    sortPriceIcon = sortBy.sortPrice > 0 ? <i className="fa-solid fa-sort-up"></i> : <i className="fa-solid fa-sort-down"></i>
   }
 
   return (
