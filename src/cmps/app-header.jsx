@@ -73,7 +73,7 @@ function AppHeader(props) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              {/* <MenuIcon /> */}
+              <i className="fa-solid fa-bars"></i>
             </IconButton>
             <Menu
               id="menu-appbar"

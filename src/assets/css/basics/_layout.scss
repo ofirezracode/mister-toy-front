@@ -23,3 +23,19 @@
     gap: 3.6rem;
   }
 }
+
+.toy-filter {
+  .filters {
+    margin-block-end: 2.4rem;
+    @include flex();
+    @include center();
+    gap: 3.2rem;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr;
+  }
+  .sorts {
+    @include flex();
+    @include center();
+    gap: 3.2rem;
+  }
+}

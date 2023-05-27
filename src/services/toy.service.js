@@ -11,6 +11,7 @@ export const toyService = {
   remove,
   getEmptyToy,
   getDefaultFilter,
+  getDefaultSort,
   getLabels,
   getInStockByLabel,
   getAvgByLabel,
@@ -42,8 +43,20 @@ function getEmptyToy() {
   }
 }
 
-function getDefaultFilter() {
-  return { name: '', inStock: 'all', labels: [], pageIdx: 0 }
+function getDefaultFilter(searchParams = { get: () => {} }) {
+  return {
+    name: searchParams.get('name') || '',
+    inStock: searchParams.get('inStock') || 'all',
+    labels: searchParams.get('labels') || [],
+    pageIdx: +searchParams.get('pageIdx') || 0,
+  }
+}
+
+function getDefaultSort(searchParams = { get: () => {} }) {
+  return {
+    sortName: +searchParams.get('sortName') || 0,
+    sortPrice: +searchParams.get('sortPrice') || 0,
+  }
 }
 
 function getLabels() {

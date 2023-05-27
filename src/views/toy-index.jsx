@@ -1,14 +1,12 @@
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import Button from '@mui/material/Button'
 
 import { toyService } from '../services/toy.service'
-import { loadToys, saveToy } from '../store/toy.action.js'
-import { saveFilter } from '../store/filter.action'
-
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { loadToys } from '../store/toy.action.js'
+import { saveFilter, saveSort } from '../store/filter.action'
 
 import ToyList from '../cmps/toy-list'
 import ToyFilter from '../cmps/toy-filter'
@@ -16,28 +14,28 @@ import ToyFilter from '../cmps/toy-filter'
 function ToyIndex() {
   const toys = useSelector((storeState) => storeState.toyModule.toys)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
+  const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
   const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
 
+  const [searchParams, setSearchParams] = useSearchParams('')
+
   useEffect(() => {
-    loadToys(filterBy)
-  }, [filterBy])
+    saveFilter(toyService.getDefaultFilter(searchParams))
+    saveSort(toyService.getDefaultSort(searchParams))
+  }, [])
 
-  function onEditToy(toy) {
-    const price = +prompt('New price?', toy.price)
-    if (!price || price === toy.price) return
-
-    const toyToSave = { ...toy, price }
-    saveToy(toyToSave)
-      .then((savedToy) => {
-        showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
-      })
-      .catch((err) => {
-        showErrorMsg('Cannot update toy')
-      })
-  }
+  useEffect(() => {
+    loadToys(filterBy, sortBy)
+  }, [filterBy, sortBy])
 
   function onFilterChange(filter) {
     saveFilter({ ...filterBy, ...filter })
+    setSearchParams({ ...sortBy, ...filterBy, ...filter })
+  }
+
+  function onSortChange(sort) {
+    saveSort({ sortName: 0, sortPrice: 0, ...sort })
+    setSearchParams({ ...sortBy, ...filterBy, ...sort })
   }
 
   return (
@@ -48,8 +46,8 @@ function ToyIndex() {
           Add toy <i className="fa-solid fa-plus"></i>
         </Button>
       </Link>
-      <ToyFilter filterBy={filterBy} onFilterChange={onFilterChange} />
-      <ToyList toys={toys} onEditToy={onEditToy} />
+      <ToyFilter sortBy={sortBy} filterBy={filterBy} onFilterChange={onFilterChange} onSortChange={onSortChange} />
+      <ToyList toys={toys} />
     </section>
   )
 }

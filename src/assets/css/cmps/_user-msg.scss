@@ -1,0 +1,25 @@
+.user-msg {
+  padding: 1.2rem;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+
+  font-weight: bold;
+  border-radius: 2px;
+
+  @include flex();
+  @include align-center();
+  gap: 1.2rem;
+
+  border-radius: 6px;
+
+  button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    @include flex();
+    @include center();
+    i {
+      margin-inline-start: 0;
+    }
+  }
+}

@@ -10,6 +10,7 @@ import Dashboard from './views/dashboard.jsx'
 import AboutUs from './views/about-us.jsx'
 import ToyDetails from './views/toy-details.jsx'
 import AddToy from './views/add-toy.jsx'
+import UserMsg from './cmps/user-msg.jsx'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route element={<AboutUs />} path="/about-us" />
             </Routes>
           </main>
+          <UserMsg />
         </section>
       </Router>
     </Provider>

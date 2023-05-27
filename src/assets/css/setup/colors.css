@@ -11,7 +11,8 @@
   --gray3: #4b5563;
 }
 
-body {
+body,
+.user-msg button {
   background-color: var(--clr4);
   color: var(--clr1);
 }
@@ -20,7 +21,8 @@ body {
 .toy-filter,
 .filter-container.name input,
 .toy-preview,
-.add-toy form {
+.add-toy form,
+.user-msg {
   color: var(--clr4);
   background-color: var(--clr1);
 }
@@ -46,7 +48,8 @@ body {
 .toy-preview .preview-buttons button,
 .toy-preview .details-buttons button,
 .add-toy button,
-.toy-index .add-toy-btn {
+.toy-index .add-toy-btn,
+.toy-filter .sorts button {
   background-color: var(--clr3);
   color: var(--gray3);
 }
@@ -55,7 +58,8 @@ body {
 .toy-preview .preview-buttons button:hover,
 .toy-preview .details-buttons button:hover,
 .add-toy button:hover,
-.toy-index .add-toy-btn:hover {
+.toy-index .add-toy-btn:hover,
+.toy-filter .sorts button:hover {
   background-color: var(--clr4);
   color: var(--clr1);
 }

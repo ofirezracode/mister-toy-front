@@ -8,7 +8,7 @@ import { Button, Checkbox, FormControl, ListItemText, MenuItem, Select } from '@
 import { saveToy } from '../store/toy.action'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-function AddToy({ children }) {
+function AddToy() {
   const { toyId } = useParams()
   const [toy, setToy] = useState(toyService.getEmptyToy())
 
@@ -35,6 +35,7 @@ function AddToy({ children }) {
   function onSubmit() {
     saveToy(toy)
       .then((savedToy) => {
+        showSuccessMsg('Toy saved')
         if (toyId) navigate(`/toy/${toy._id}`)
         else navigate('/toy')
       })

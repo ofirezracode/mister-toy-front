@@ -10,11 +10,11 @@ import FormControl from '@mui/material/FormControl'
 import ListItemText from '@mui/material/ListItemText'
 import Select from '@mui/material/Select'
 import Checkbox from '@mui/material/Checkbox'
+import { Button } from '@mui/material'
 
 import { toyService } from '../services/toy.service'
 
-function ToyFilter({ onFilterChange, filterBy }) {
-  filterBy = filterBy ? filterBy : toyService.getDefaultFilter()
+function ToyFilter({ onFilterChange, onSortChange, filterBy, sortBy }) {
   const [name, setName] = useState(filterBy.name)
   const [inStock, setInStock] = useState(filterBy.inStock)
   const [labels, setLabels] = useState(filterBy.labels)
@@ -52,55 +52,73 @@ function ToyFilter({ onFilterChange, filterBy }) {
     onFilterChange({ inStock: e.target.value })
   }
 
+  function sortChange(e, sortProp) {
+    e.preventDefault()
+    onSortChange({ [sortProp]: sortBy[sortProp] + 1 > 1 ? -1 : sortBy[sortProp] + 1 })
+  }
+
+  let sortNameIcon, sortPriceIcon
+  sortNameIcon = sortPriceIcon = ''
+  if (sortBy.sortName) {
+    sortNameIcon = sortBy.sortName > 0 ? <i class="fa-solid fa-sort-up"></i> : <i class="fa-solid fa-sort-down"></i>
+  } else if (sortBy.sortPrice) {
+    sortPriceIcon = sortBy.sortPrice > 0 ? <i class="fa-solid fa-sort-up"></i> : <i class="fa-solid fa-sort-down"></i>
+  }
+
   return (
     <form className="toy-filter">
-      <div className="filter-container name">
-        <input value={name} onChange={onNameChange} type="text" name="name" placeholder="Search..."></input>
+      <div className="filters">
+        <div className="filter-container name">
+          <input value={name} onChange={onNameChange} type="text" name="name" placeholder="Search..."></input>
+        </div>
+        <div className="filter-container">
+          <FormControl>
+            <RadioGroup row aria-labelledby="stock-filter" defaultValue="all" name="stock">
+              <FormControlLabel className="stock-radio-item" onChange={onStockChange} value="all" control={<Radio />} label="All" />
+              <FormControlLabel
+                className="stock-radio-item"
+                onChange={onStockChange}
+                value="true"
+                control={<Radio />}
+                label="Only in stock"
+              />
+              <FormControlLabel
+                className="stock-radio-item"
+                onChange={onStockChange}
+                value="false"
+                control={<Radio />}
+                label="Only out of stock"
+              />
+            </RadioGroup>
+          </FormControl>
+        </div>
+        <div className="filter-container labels">
+          <label>Labels:</label>
+          <FormControl className="label-select">
+            <Select
+              className="select-container"
+              id="filter-labels"
+              multiple
+              value={labels}
+              onChange={handleChange}
+              input={<OutlinedInput label="Tag" />}
+              renderValue={(selected) => selected.join(', ')}
+              sx={{ fontSize: 14 }}
+            >
+              {toyService.getLabels().map((label) => (
+                <MenuItem key={label} value={label}>
+                  <Checkbox checked={labels.indexOf(label) > -1} />
+                  <ListItemText className="label-list-item" primary={label} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
       </div>
-      <div className="filter-container">
-        <FormControl>
-          <RadioGroup row aria-labelledby="stock-filter" defaultValue="all" name="stock">
-            <FormControlLabel className="stock-radio-item" onChange={onStockChange} value="all" control={<Radio />} label="All" />
-            <FormControlLabel
-              className="stock-radio-item"
-              onChange={onStockChange}
-              value="true"
-              control={<Radio />}
-              label="Only in stock"
-            />
-            <FormControlLabel
-              className="stock-radio-item"
-              onChange={onStockChange}
-              value="false"
-              control={<Radio />}
-              label="Only out of stock"
-            />
-          </RadioGroup>
-        </FormControl>
+      <div className="sorts">
+        <Button onClick={(e) => sortChange(e, 'sortName')}>Sort by name {sortNameIcon}</Button>
+        <Button onClick={(e) => sortChange(e, 'sortPrice')}>Sort by price {sortPriceIcon}</Button>
       </div>
-      <div className="filter-container labels">
-        <label>Labels:</label>
-        <FormControl className="label-select">
-          <Select
-            className="select-container"
-            id="filter-labels"
-            multiple
-            value={labels}
-            onChange={handleChange}
-            input={<OutlinedInput label="Tag" />}
-            renderValue={(selected) => selected.join(', ')}
-            sx={{ fontSize: 14 }}
-          >
-            {toyService.getLabels().map((label) => (
-              <MenuItem key={label} value={label}>
-                <Checkbox checked={labels.indexOf(label) > -1} />
-                <ListItemText className="label-list-item" primary={label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <div className="filter-container"></div>
     </form>
   )
 }

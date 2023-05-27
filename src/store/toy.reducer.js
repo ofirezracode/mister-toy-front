@@ -10,12 +10,14 @@ export const ADD_TOY_TO_CART = 'ADD_TOY_TO_CART'
 export const CLEAR_CART = 'CLEAR_CART'
 
 export const SET_FILTER = 'SET_FILTER'
+export const SET_SORT = 'SET_SORT'
 
 const initialState = {
   toys: [],
   isLoading: false,
   isCartShown: false,
   filterBy: { name: '', inStock: 'all', labels: [], pageIdx: 0 },
+  sortBy: { sortName: 0, sortPrice: 0 },
   shoppingCart: [],
 }
 
@@ -54,6 +56,10 @@ export function toyReducer(state = initialState, action) {
     // Filter
     case SET_FILTER:
       return { ...state, filterBy: action.filterBy }
+
+    // Filter
+    case SET_SORT:
+      return { ...state, sortBy: action.sortBy }
 
     default:
       return state
